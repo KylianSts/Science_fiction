@@ -85,3 +85,13 @@ climate_df <- planet_data %>%
   select(Planet_code, climate_type)
 ```
 
+```{r}
+ggplot(climate_df, aes(x = Planet_code, fill = climate_type)) +
+  geom_bar(position = "stack")
+```
+```{r}
+ggplot(terrain_df, aes(x = Planet_code, fill = terrain_type)) +
+  geom_bar(position = "stack")
+```
+
+
