@@ -10,10 +10,37 @@ editor: visual
 <https://github.com/KylianSts/Science_fiction>
 
 ```{r}
+#| message: false
 here::i_am("Science_fiction.Rproj")
 library(here)
-library(vroom)
 library(dplyr)
 library(tidyr)
+library(stringr)
+library(vroom)
 library(ggplot2)
+```
+
+```{r}
+file_content <- readLines("Data/Planet_data.csv")
+
+# Replace all '?' with NA in the entire file content
+file_content <- gsub("\\?", "NA", file_content)
+
+writeLines(file_content, "Data/Planet_data.csv")
+
+planet_data <- vroom("Data/Planet_data.csv", delim = ':', locale = locale(decimal_mark = ","))
+```
+
+```{r}
+nb_row <- planet_data |> nrow()
+nb_variable <- planet_data |> ncol()
+
+if (nb_row == 971 && nb_variable == 8) {
+  cat('There are no missing planets and variables.\n')
+} else {
+  cat('Data not correctly loaded.\n')
+}
+```
+```{r}
+planet_data |> select(where(is.numeric))
 ```
