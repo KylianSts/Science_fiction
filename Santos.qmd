@@ -22,6 +22,8 @@ library(knitr)
 
 ```
 
+# Main dataset import
+
 ```{r}
 file_content <- readLines("Data/Planet_data.csv")
 
@@ -65,4 +67,21 @@ ggplot(planet_data, aes(x = `Radius (Earth)`, y = Density)) +
        y = "Density")
 ```
 
+# Improved data representation
+
+```{r}
+terrain_df <- planet_data %>%
+  reframe(
+    terrain_type = str_split(`terrain type`, ",") %>% unlist(),
+    Planet_code = rep(Planet_code, lengths(str_split(`terrain type`, ",")))
+  ) %>%
+  select(Planet_code, terrain_type)
+
+climate_df <- planet_data %>%
+  reframe(
+    climate_type = str_split(Type_climate, ",") %>% unlist(),
+    Planet_code = rep(Planet_code, lengths(str_split(Type_climate, ",")))
+  ) %>%
+  select(Planet_code, climate_type)
+```
 
