@@ -18,6 +18,8 @@ library(tidyr)
 library(stringr)
 library(vroom)
 library(ggplot2)
+library(knitr)
+
 ```
 
 ```{r}
@@ -44,3 +46,23 @@ if (nb_row == 971 && nb_variable == 8) {
 ```{r}
 planet_data |> select(where(is.numeric))
 ```
+
+```{r}
+#| message: false
+summary_table <- planet_data %>%
+  summarise(
+    nb_ob = n(),
+    nb_var = ncol(.)
+    )
+
+kable(summary_table)
+```
+```{r}
+ggplot(planet_data, aes(x = `Radius (Earth)`, y = Density)) +
+  geom_point(na.rm = TRUE) +
+  labs(title = "Density of Planets as a Function of Radius",
+       x = "Radius (Earth)",
+       y = "Density")
+```
+
+
