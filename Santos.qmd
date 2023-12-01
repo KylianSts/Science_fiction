@@ -90,8 +90,25 @@ ggplot(climate_df, aes(x = Planet_code, fill = climate_type)) +
   geom_bar(position = "stack")
 ```
 ```{r}
-ggplot(terrain_df, aes(x = Planet_code, fill = terrain_type)) +
-  geom_bar(position = "stack")
+ggplot(na.omit(terrain_df), aes(x = Planet_code, fill = terrain_type)) +
+  geom_bar(position = "stack") 
 ```
+# Star data
+
+```{r}
+star_data <- vroom("Data/STARS.csv", delim = ':')
+```
+
+```{r}
+nb_star_row <- nrow(star_data)
+nb_star_variable <- ncol(star_data)
+
+if (nb_star_row == 540 && nb_star_variable == 8) {
+  cat('Star data loaded successfully.\n')
+} else {
+  cat('Star data not correctly loaded.\n')
+}
+```
+
 
 
