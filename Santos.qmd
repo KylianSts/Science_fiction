@@ -4,3 +4,16 @@ author: "Kylian SANTOS"
 format: html
 editor: visual
 ---
+
+## Link to github repository
+
+<https://github.com/KylianSts/Science_fiction>
+
+```{r}
+here::i_am("Science_fiction.Rproj")
+library(here)
+library(vroom)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
